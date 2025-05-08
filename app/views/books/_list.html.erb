@@ -1,0 +1,46 @@
+
+
+    <div class="col-md-3">
+    <h1>User info</h1>
+  
+    <% if current_user.profile_image.attached? %>
+  <%= image_tag current_user.profile_image.variant(resize_to_limit: [100, 100]) %>
+<% else %>
+  <%= image_tag 'no_image.jpg', size: "100x100" %>
+<% end %>
+    <ul> 
+      <li>
+        <p>name<%= current_user.name %></p>
+      </li>
+      <li>
+        <p>introduction:<%= current_user.introduction %></p>
+      </li>
+    </ul>
+    <%= link_to edit_user_path(current_user.id) do %>
+    <i class="fa-solid fa-user-gear"></i>
+    <%end%>
+   
+
+    <h1>New book</h1>
+    
+    <% if @book.errors.any? %>
+  <strong><%= @book.errors.count %> errors prohibited this book from being saved:</strong>
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+    
+
+
+  <%= form_with model:Book.new, local:true do |f| %>
+  <p><%= f.label :title %></p>
+  <p><%= f.text_field :title %></p>
+
+  <p><%= f.label :body %></p>
+  <p><%= f.text_area :body %></p>
+
+  <p><%= f.submit 'Create Book' %></p>
+<% end %>
+</div>
