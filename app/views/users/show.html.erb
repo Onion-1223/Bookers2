@@ -63,6 +63,7 @@
           <%= link_to 'Destroy', book_path(book.id), method: :delete %>
           <% end %>
           </td>
+          <td><%= link_to "#{book.post_comments.count} コメント", book_path(book.id) %></td>
         </tr>
       </tbody>
       <% end %>
